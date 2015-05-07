@@ -185,6 +185,19 @@ $context["news"], "status", array()) == 1)) {
         // line 84
         echo "
     </tbody>
+    <tfoot>
+    <tr>
+        <td colspan=\"2\">
+            <div align=\"center\">Total = <span class=\"badge badge-inverse\">10</span></div>
+        </td>
+        <td colspan=\"2\">
+            <div align=\"center\">Todo = <span class=\"badge\">5</span></div>
+        </td>
+        <td colspan=\"2\">
+            <div align=\"center\">Done = <span class=\"badge badge-success\">5</span></div>
+        </td>
+    </tr>
+    </tfoot>
     </table>
 
 
@@ -217,10 +230,10 @@ $context["news"], "status", array()) == 1)) {
     ";
     }
 
-    // line 107
+    // line 120
     public function block_footer($context, array $blocks = array())
     {
-        // line 108
+        // line 121
         echo "    ";
         $this->displayParentBlock("footer", $context, $blocks);
         echo "
@@ -239,6 +252,6 @@ $context["news"], "status", array()) == 1)) {
 
     public function getDebugInfo()
     {
-        return array (  224 => 108,  221 => 107,  214 => 15,  211 => 14,  186 => 84,  170 => 74,  164 => 71,  155 => 65,  149 => 62,  145 => 61,  141 => 59,  137 => 57,  135 => 56,  132 => 55,  130 => 54,  125 => 52,  121 => 51,  117 => 50,  114 => 49,  110 => 48,  86 => 27,  80 => 26,  75 => 24,  69 => 23,  61 => 17,  59 => 14,  52 => 9,  49 => 8,  42 => 4,  39 => 3,  11 => 1,);
+        return array (  237 => 121,  234 => 120,  227 => 15,  224 => 14,  186 => 84,  170 => 74,  164 => 71,  155 => 65,  149 => 62,  145 => 61,  141 => 59,  137 => 57,  135 => 56,  132 => 55,  130 => 54,  125 => 52,  121 => 51,  117 => 50,  114 => 49,  110 => 48,  86 => 27,  80 => 26,  75 => 24,  69 => 23,  61 => 17,  59 => 14,  52 => 9,  49 => 8,  42 => 4,  39 => 3,  11 => 1,);
     }
 }

@@ -15,52 +15,76 @@
 /* Flex */
 
 main {
+	display: -webkit-box;
+	display:		 box;
+	-webkit-box-orient: vertical;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
 	-webkit-flex-direction: column;
-	flex-direction: column;
+			flex-direction: column;
 	-webkit-align-items: center;
-	align-items: center;
+			align-items: center;
 	min-height: 350px;
 }
 
 .headerDiv, .resultsDiv, .content, footer ul {
+	display: -webkit-box;
+	display:		 box;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
 	max-width: 1000px;
 	min-width: 740px;
 	width: 80%;
+	height: auto;
 	height: 100%;
 	margin-right: auto;
 	margin-left: auto;
 }
 
 .headerDiv, .content {
+	-webkit-box-orient: vertical;
 	-webkit-flex-direction: column;
-	flex-direction: column;
+			flex-direction: column;
 	-webkit-justify-content: space-between;
-	justify-content: space-between;
+			justify-content: space-between;
 }
 
 .resultsDiv {
-	-webkit-ustify-content: space-around;
-	justify-content: space-around;
+	-webkit-justify-content: space-around;
+			justify-content: space-around;
 }
 
 .content .block, header div {
+	display: -webkit-box;
+	display:		 box;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
 	-webkit-justify-content: space-between;
-	justify-content: space-between;
+			justify-content: space-between;
 }
 
 .content article {
+	display: -webkit-box;
+	display:		 box;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
+	-webkit-box-orient: vertical;
 	-webkit-flex-direction: column;
-	flex-direction: column;
-	-webkit-justify-content: flex-start;
-	justify-content: flex-start;
+			flex-direction: column;
+	-webkit-justify-content: -webkit-flex-start;
+			justify-content: flex-start;
+}
+
+
+.imagesFlex {
+	display: -webkit-box;
+	display:		 box;
+	display: -webkit-flex;
+	display: 		 flex;
+	-webkit-flex-wrap: wrap;
+			flex-wrap: wrap;
+	-webkit-align-content: flex-start;
+			align-content: flex-start;
 }
 
 
@@ -90,7 +114,7 @@ a:hover {
 	color: #747f93;
 }
 
-h1, h1 span, h2, h3, h2 a, h3 a, header li a, header p, footer li {
+h1, h1 span, h2, h3, h4, h2 a, h3 a, header li a, header p, footer li {
 	font-family: CenturyGothicRegular, Arial, sans-serif;
 }
 
@@ -107,6 +131,13 @@ h2 {
 }
 h3 {
 	font-size: 1.4rem;
+	margin-bottom: 7px;
+	color: #972622;
+	padding-bottom: 5px;
+}
+
+h4 {
+	font-size: 1.2rem;
 	margin-bottom: 7px;
 	color: #972622;
 }
@@ -129,10 +160,10 @@ footer {
 	margin-top: 20px;
 }
 
-/*.nonDisplay {
-	display: none;
-}*/
-
+footer.down {
+	position: fixed;
+	bottom: 0;
+}
 
 
 /** Header **/
@@ -214,12 +245,15 @@ nav .signIn {
 }
 
 .result {
+	display: -webkit-box;
+	display:		 box;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
+	-webkit-box-orient: vertical;
 	-webkit-flex-direction: column;
-	flex-direction: column;
+			flex-direction: column;
 	-webkit-align-items: center;
-	align-items: center;
+			align-items: center;
 	margin: 40px 4% 30px;
 	width: 33%;
 }
@@ -229,11 +263,11 @@ nav .signIn {
 }
 
 .icon:hover {
-	-webkit-animation: move 0.5s infinite;
-	   -moz-animation: move 0.5s infinite;
-		-ms-animation: move 0.5s infinite;
-		 -o-animation: move 0.5s infinite;
-			animation: move 0.5s infinite;
+	-webkit-animation: move 0.5s;
+	   -moz-animation: move 0.5s;
+		-ms-animation: move 0.5s;
+		 -o-animation: move 0.5s;
+			animation: move 0.5s;
 }
 
 .result:nth-child(2) .icon {
@@ -259,7 +293,7 @@ nav .signIn {
 
 .content .block article {
 	-webkit-flex-basis: 60%;
-	flex-basis: 60%;
+			flex-basis: 60%;
 	margin-left: 20px;
 	height: 200px;
 }
@@ -267,22 +301,24 @@ nav .signIn {
 .content p.shortText {
 	display: block;
 	display: -webkit-box;
-	-webkit-line-clamp: 5; /*line-clamp works only in webkits :( */
+	-webkit-line-clamp: 3; /*line-clamp works only in webkits :( */
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	height: 60px;
 }
 
 .content div:nth-child(2) article{
 	-webkit-flex-basis: 40%;
-	flex-basis: 40%;
+			flex-basis: 40%;
 	height: 350px;
 }
 .content div:nth-child(2) p.shortText {
-	-webkit-line-clamp: 12;
+	-webkit-line-clamp: 9;
+	height: 184px;
 }
 
-.content p.date {
+.content article p.date {
 	text-align: right;
 	margin-top: 15px; /*cut off text (needs for non-webkits)*/
 }
@@ -310,6 +346,36 @@ nav .signIn {
 	margin-left: 5px;
 }
 
+/* general for articles */
+article ul {
+	margin-left: 30px;
+}
+
+/* pagination */
+.pagination{
+    margin: 10px 0 60px;
+    font-size: 1.1rem;
+}
+
+.pagination li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    color: #972622;
+    font-weight: bold;
+}
+.pagination li:hover {
+    color: #e59487;
+    cursor: pointer;
+}
+.pagination li.current {
+	cursor: default;
+	color: #e59487;
+}
+
+
 /** Images **/
 /*Main image*/
 #mainImg {
@@ -331,6 +397,14 @@ nav .signIn {
 	background-position: top;
 	height: 400px;
 	max-width: 400px;
+	margin-right: 10px;
+}
+
+#successImg2 {
+	background-image: url(../img/about_img2.jpg);	
+	background-position: top;
+	height: 400px;
+	max-width: 550px;
 }
 
 #successMap {
@@ -341,15 +415,15 @@ nav .signIn {
 /*images on main page*/
 .content .imageDiv { 
 	-webkit-flex-basis: 40%;
-	flex-basis: 40%;
-	background-image: url(../img/img.jpg);
+			flex-basis: 40%;
+	background-image: url(../img/stub_img.jpg);
 	background-size: cover;
 	background-position: center;
 	height: 200px;
 }
 .content div:nth-child(2) .imageDiv {
 	-webkit-flex-basis: 60%;
-	flex-basis: 60%;
+			flex-basis: 60%;
 	height: 350px;
 }
 /*images in news*/
@@ -385,6 +459,7 @@ nav .signIn {
 }
 .containerDiv .closeImg:hover {
 	opacity: 0.6;
+	cursor: pointer;
 }
 .containerDiv .fa-times {
 	color: #fff;
@@ -408,12 +483,14 @@ nav .signIn {
 }
 
 .containerDiv {
+	display: -webkit-box;
+	display:		 box;
 	display: -webkit-flex;
-	display: flex;
+	display: 		 flex;
 	-webkit-justify-content: center;
-	justify-content: center;
+			justify-content: center;
 	-webkit-align-items: center;
-	align-items: center;
+			align-items: center;
 	width: 100%;
 	height: 100%;
 	position: fixed;	
@@ -421,7 +498,7 @@ nav .signIn {
 	left: 0;
 }
 
-.form {
+.containerDiv .form {
 	padding: 20px 30px;
 	background-color: #fff;
 }
@@ -476,6 +553,44 @@ nav .signIn {
 }
 .registration:hover {
 	color: #e59487;
+}
+
+
+/** Comments **/
+
+.comments {
+	width: 100%;
+	max-width: 700px;
+	margin: 40px 0;
+}
+
+.comments .comment {
+	margin: 30px 0;
+}
+.comments .nickname, .comments .date {
+	display: inline-block;
+}
+.comments .nickname {
+	color: #972622;
+	font-weight: bold;	
+}
+
+.comments .date {
+	margin-left: 20px;
+	font-size: 0.7rem;
+	color: #888;
+}
+
+.comments form textarea {
+	width: 100%;
+}
+
+.comments form {
+	margin: 20px 0;
+}
+
+.comments .form .button {
+	display: none;
 }
 
 

@@ -1,25 +1,33 @@
-/*загрузка более большого изображения на главную*/
+/* load bigger image to the main page */
 @media screen and (min-width: 1400px) {
-
+	#mainImg {
+		height: 600px;
+		background-image: url(../img/main_img_big.jpg);
+	}
 }
 
 @media screen and (min-width: 780px) {
+	/* to avoid bugs */
 	header nav, header .upperHeader .signIn {
 		display: block;	
 	}
 }
 
-
+/* the main feature is divplaying burger 
+   and changing navigation in header and footer */
 @media screen and (max-width: 780px) {
 	.headerDiv, .resultsDiv, .content, footer ul {
 		min-width: 100px;
 		width: 90%;
 	}
 	.upperHeader {
+		display: -webkit-box;
+		display:		 box;
 		display: -webkit-flex;
-		display: flex;
+		display: 		 flex;
+		-webkit-box-orient: horizontal;
 		-webkit-flex-direction: row;
-		flex-direction: row;
+				flex-direction: row;
 	}
 
 	header {
@@ -54,8 +62,9 @@
 	}
 
 	footer ul {
+		-webkit-box-orient: vertical;
 		-webkit-flex-direction: column;
-		flex-direction: column;
+				flex-direction: column;
 	}
 	footer li {
 		margin-bottom: 10px;
@@ -67,10 +76,9 @@
 	}
 }
 
-/*перестойка текста в превьюшках новостей, 
-перестройка results на главной, 
-уменьшение высоты изображений, 
-подргузка более лёгких*/
+/* rebuilding news previews, .results, 
+   change height of images, 
+   load smaller images */
 @media only screen and (max-width: 620px) {
 	#mainImg {
 		height: 300px;
@@ -78,10 +86,11 @@
 	}
 
 	.resultsDiv {
+		-webkit-box-orient: vertical;
 		-webkit-flex-direction: column;
-		flex-direction: column;
+				flex-direction: column;
 		-webkit-align-items: center;
-		align-items: center;
+				align-items: center;
 		margin: 20px auto 30px;
 	}
 	.result {
@@ -90,8 +99,9 @@
 		max-width: 400px;
 	}
 	.content .block {
+		-webkit-box-orient: vertical;
 		-webkit-flex-direction: column;
-		flex-direction: column;
+				flex-direction: column;
 	}
 	.content .block article {
 		margin-left: 0px;
@@ -110,14 +120,23 @@
 	}
 	.content div:nth-child(2) p.shortText {
 		-webkit-line-clamp: 5;
+		height: 60px;
+	}
+	#descriptionImg {
+		height: 330px;
 	}
 }
 
+/* change size of images, 
+   size of logo*/
 @media only screen and (max-width: 380px) {
 	#mainImg {
 		height: 250px;
 		background-image: url(../img/main_img_small.jpg);
 		background-size: cover;
+	}
+	.content div:nth-child(2) .imageDiv {
+		height: 200px;
 	}
 	h1 {
 		font-size: 0.8rem;
@@ -125,5 +144,8 @@
 
 	h1 span.logo {
 		font-size: 2rem;
+	}
+	#descriptionImg {
+		height: 230px;
 	}
 }

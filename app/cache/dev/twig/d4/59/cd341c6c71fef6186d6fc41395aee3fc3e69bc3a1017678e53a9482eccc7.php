@@ -71,10 +71,7 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
         // line 25
         echo $this->env->getExtension('routing')->getPath("news");
         echo "\">Новости</a></li>
-                <li class=\"link\"><a href=\"";
-        // line 26
-        echo $this->env->getExtension('routing')->getPath("trainings");
-        echo "\" id=\"descriptionLink\">Описание тренингов</a></li>
+                <li class=\"link\"><a href=\"description.html\" id=\"descriptionLink\">Описание тренингов</a></li>
                 <li class=\"link\"><a href=\"success.html\" id=\"successLink\">История успеха</a></li>
                 <li class=\"link\"><a href=\"contacts.html\" id=\"contactsLink\">Контакты</a></li>
 
@@ -185,6 +182,6 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
 
     public function getDebugInfo()
     {
-        return array (  162 => 77,  159 => 76,  136 => 53,  132 => 52,  127 => 50,  123 => 49,  117 => 46,  113 => 45,  107 => 41,  104 => 40,  99 => 72,  97 => 40,  93 => 38,  90 => 37,  76 => 26,  72 => 25,  68 => 24,  60 => 19,  41 => 2,  38 => 1,  34 => 76,  30 => 74,  28 => 37,  25 => 36,  23 => 1,);
+        return array (  159 => 77,  156 => 76,  133 => 53,  129 => 52,  124 => 50,  120 => 49,  114 => 46,  110 => 45,  104 => 41,  101 => 40,  96 => 72,  94 => 40,  90 => 38,  87 => 37,  72 => 25,  68 => 24,  60 => 19,  41 => 2,  38 => 1,  34 => 76,  30 => 74,  28 => 37,  25 => 36,  23 => 1,);
     }
 }
