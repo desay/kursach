@@ -1,0 +1,48 @@
+{% extends "@App/Main/main_admin.html.twig" %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock header %}
+
+
+{% block content %}
+
+
+    <div class="container">
+    <div class="row">
+
+    {% block admin_menu %}
+        {{ parent() }}
+    {% endblock %}
+
+
+    <div class="span9">
+    <div class="well">
+
+
+
+        {% if news is defined %}
+            <h3>Edit news # {{ news.id }}</h3>
+        {% else %}
+            <h3>Add new news</h3>
+        {% endif %}
+
+        {{ form_errors(form) }}
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+{% endblock content %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock footer %}
