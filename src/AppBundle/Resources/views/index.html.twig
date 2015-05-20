@@ -1,0 +1,52 @@
+{% extends "@App/Main/main.html.twig" %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock header %}
+
+{% block content %}
+
+    <main>
+        <div id="mainImg"></div>
+
+        <div class="results">
+            <div class="resultsDiv">
+                <div class="result">
+                    <img class="icon" src="/icons/iconmonstr-microphone-5-icon.svg">
+                    <h3>Выступайте</h3>
+                    <p>Вдохновляйте и меняйте мнение как единичного слушателя, так и самой большой толпы.</p>
+                </div>
+                <div class="result">
+                    <img class="icon" src="/icons/iconmonstr-coin-10-icon.svg">
+                    <h3>Продавайте</h3>
+                    <p>Вселяйте уверенность и убеждайте даже самых сложных покупателей.</p>
+                </div>
+                <div class="result">
+                    <img class="icon" src="/icons/iconmonstr-speech-bubble-14-icon.svg">
+                    <h3>Общайтесь</h3>
+                    <p>Доносите свою мысль до собеседника красиво и точно.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="link"><a href="/news" id="newsLink">Последние новости</a></h2>
+
+            {% for news in news %}
+            <div class="block">
+                <div class="imageDiv"></div>{# news.image #}
+                <article>
+                    <h3 class="link"><a href="">{{ news.title }}</a></h3>
+                    <p class="shortText">{{ news.description }}</p>
+                    <p class="date">{{ news.dateCreate|date('d.m.Y') }}</p>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock footer %}
