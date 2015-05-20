@@ -136,17 +136,37 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\MainController::indexAction',  '_route' => 'index',);
         }
 
-        if (0 === strpos($pathinfo, '/news')) {
-            // news
-            if ($pathinfo === '/news') {
-                return array (  '_controller' => 'AppBundle\\Controller\\NewsController::indexAction',  '_route' => 'news',);
+        // index_login_form
+        if ($pathinfo === '/loginForm.html') {
+            return array (  '_controller' => 'AppBundle\\Controller\\MainController::loginFormAction',  '_route' => 'index_login_form',);
+        }
+
+        // index_register_form
+        if ($pathinfo === '/registrationForm.html') {
+            return array (  '_controller' => 'AppBundle\\Controller\\MainController::registerFormAction',  '_route' => 'index_register_form',);
+        }
+
+        // news
+        if ($pathinfo === '/news') {
+            return array (  '_controller' => 'AppBundle\\Controller\\NewsController::indexAction',  '_route' => 'news',);
+        }
+
+        if (0 === strpos($pathinfo, '/getNews')) {
+            // get_news_length
+            if ($pathinfo === '/getNewsLength') {
+                return array (  '_controller' => 'AppBundle\\Controller\\NewsController::getNewsLength',  '_route' => 'get_news_length',);
             }
 
-            // news_item
-            if (preg_match('#^/news/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'news_item')), array (  '_controller' => 'AppBundle\\Controller\\NewsController::newsAction',));
+            // get_news
+            if ($pathinfo === '/getNews') {
+                return array (  '_controller' => 'AppBundle\\Controller\\NewsController::getNewsAction',  '_route' => 'get_news',);
             }
 
+        }
+
+        // news_item
+        if (0 === strpos($pathinfo, '/news') && preg_match('#^/news/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'news_item')), array (  '_controller' => 'AppBundle\\Controller\\NewsController::newsAction',));
         }
 
         // trainings
@@ -207,14 +227,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             if (0 === strpos($pathinfo, '/login')) {
                 // fos_user_security_login
                 if ($pathinfo === '/login') {
-                    if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
-                        $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                        goto not_fos_user_security_login;
-                    }
-
                     return array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::loginAction',  '_route' => 'fos_user_security_login',);
                 }
-                not_fos_user_security_login:
 
                 // fos_user_security_check
                 if ($pathinfo === '/login_check') {
@@ -231,14 +245,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             // fos_user_security_logout
             if ($pathinfo === '/logout') {
-                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_fos_user_security_logout;
-                }
-
                 return array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::logoutAction',  '_route' => 'fos_user_security_logout',);
             }
-            not_fos_user_security_logout:
 
         }
 
@@ -260,14 +268,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             // fos_user_profile_edit
             if ($pathinfo === '/profile/edit') {
-                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                    goto not_fos_user_profile_edit;
-                }
-
                 return array (  '_controller' => 'FOS\\UserBundle\\Controller\\ProfileController::editAction',  '_route' => 'fos_user_profile_edit',);
             }
-            not_fos_user_profile_edit:
 
         }
 
@@ -275,18 +277,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             if (0 === strpos($pathinfo, '/register')) {
                 // fos_user_registration_register
                 if (rtrim($pathinfo, '/') === '/register') {
-                    if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
-                        $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                        goto not_fos_user_registration_register;
-                    }
-
                     if (substr($pathinfo, -1) !== '/') {
                         return $this->redirect($pathinfo.'/', 'fos_user_registration_register');
                     }
 
-                    return array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::registerAction',  '_route' => 'fos_user_registration_register',);
+                    return array (  '_controller' => 'Prophetz\\UserBundle\\Controller\\RegistrationController::registerAction',  '_route' => 'fos_user_registration_register',);
                 }
-                not_fos_user_registration_register:
 
                 if (0 === strpos($pathinfo, '/register/c')) {
                     // fos_user_registration_check_email
@@ -296,7 +292,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                             goto not_fos_user_registration_check_email;
                         }
 
-                        return array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::checkEmailAction',  '_route' => 'fos_user_registration_check_email',);
+                        return array (  '_controller' => 'Prophetz\\UserBundle\\Controller\\RegistrationController::checkEmailAction',  '_route' => 'fos_user_registration_check_email',);
                     }
                     not_fos_user_registration_check_email:
 
@@ -308,7 +304,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                                 goto not_fos_user_registration_confirm;
                             }
 
-                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'fos_user_registration_confirm')), array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::confirmAction',));
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'fos_user_registration_confirm')), array (  '_controller' => 'Prophetz\\UserBundle\\Controller\\RegistrationController::confirmAction',));
                         }
                         not_fos_user_registration_confirm:
 
@@ -319,7 +315,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                                 goto not_fos_user_registration_confirmed;
                             }
 
-                            return array (  '_controller' => 'FOS\\UserBundle\\Controller\\RegistrationController::confirmedAction',  '_route' => 'fos_user_registration_confirmed',);
+                            return array (  '_controller' => 'Prophetz\\UserBundle\\Controller\\RegistrationController::confirmedAction',  '_route' => 'fos_user_registration_confirmed',);
                         }
                         not_fos_user_registration_confirmed:
 

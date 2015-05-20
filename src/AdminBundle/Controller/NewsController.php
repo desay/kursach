@@ -63,16 +63,18 @@ class NewsController extends Controller
             ->add('title', 'text')
             ->add('description', 'textarea')
             ->add('status', 'choice', array('choices'  => array('0' => 'ToDo', '1' => 'Complete')))
-            ->add('date_create', 'date')
+            ->add('date_create', 'date', array('required' => false, 'widget' => 'single_text'))
             ->add('save', 'submit', array('label' => 'Add'))
             ->getForm();
 
         $form->handleRequest($request);
 
+        var_dump($form->getData()->getTitle());
+
         if ($form->isValid()) {
             /** @var News $news */
             $news = $form->getData();
-            $news->setDateCreate(new \DateTime());
+            //$news->setDateCreate(new \DateTime());
             $news->setDateUpdate(new \DateTime());
             $news->setViews(0);
             $em->persist($news);

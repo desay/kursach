@@ -8,7 +8,15 @@ class __TwigTemplate_26f26f0e48be1e8ef337f2c79021f95b3b66890d14c58f63fe028726271
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main_admin.html.twig", "@Admin/News/edit.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main_admin.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -133,6 +141,6 @@ class __TwigTemplate_26f26f0e48be1e8ef337f2c79021f95b3b66890d14c58f63fe028726271
 
     public function getDebugInfo()
     {
-        return array (  118 => 47,  115 => 46,  108 => 15,  105 => 14,  90 => 34,  86 => 33,  82 => 32,  77 => 30,  74 => 29,  70 => 27,  64 => 25,  62 => 24,  53 => 17,  51 => 14,  44 => 9,  41 => 8,  34 => 4,  31 => 3,  11 => 1,);
+        return array (  126 => 47,  123 => 46,  116 => 15,  113 => 14,  98 => 34,  94 => 33,  90 => 32,  85 => 30,  82 => 29,  78 => 27,  72 => 25,  70 => 24,  61 => 17,  59 => 14,  52 => 9,  49 => 8,  42 => 4,  39 => 3,  11 => 1,);
     }
 }

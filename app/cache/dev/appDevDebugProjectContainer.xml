@@ -4,7 +4,7 @@
     <parameter key="kernel.root_dir">/Users/olga/Desktop/kursach/app</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.name">ap_</parameter>
+    <parameter key="kernel.name">app</parameter>
     <parameter key="kernel.cache_dir">/Users/olga/Desktop/kursach/app/cache/dev</parameter>
     <parameter key="kernel.logs_dir">/Users/olga/Desktop/kursach/app/logs</parameter>
     <parameter key="kernel.bundles" type="collection">
@@ -19,6 +19,8 @@
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="AdminBundle">AdminBundle\AdminBundle</parameter>
+      <parameter key="ProphetzUserBundle">Prophetz\UserBundle\ProphetzUserBundle</parameter>
+      <parameter key="UloginAuthBundle">Ulogin\AuthBundle\UloginAuthBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -453,7 +455,7 @@
     <parameter key="assetic.write_to">/Users/olga/Desktop/kursach/app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">/usr/local/bin/node</parameter>
+    <parameter key="assetic.node.bin">/usr/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
@@ -612,14 +614,15 @@
       <parameter>ResetPassword</parameter>
       <parameter>Default</parameter>
     </parameter>
+    <parameter key="ulogin_auth.routing.success_auth">homepage</parameter>
+    <parameter key="ulogin_auth.secret_key">~Zxl-4Qax-MH6%ihLK-vK8$WDqy0PPe^7MzlEIx</parameter>
+    <parameter key="ulogin_auth.success_handler">security.success_login_handler</parameter>
+    <parameter key="ulogin_auth.photo_directory">/static/files/photo/</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
     <parameter key="twig.extension.webprofiler.class">Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
-    <parameter key="web_profiler.debug_toolbar.class">Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</parameter>
-    <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
-    <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="sensio_distribution.webconfigurator.class">Sensio\Bundle\DistributionBundle\Configurator\Configurator</parameter>
     <parameter key="sensio_distribution.webconfigurator.doctrine_step.class">Sensio\Bundle\DistributionBundle\Configurator\Step\DoctrineStep</parameter>
     <parameter key="sensio_distribution.webconfigurator.secret_step.class">Sensio\Bundle\DistributionBundle\Configurator\Step\SecretStep</parameter>
@@ -1135,6 +1138,7 @@
               <argument key="fos_user_registration">fos_user.registration.form.type</argument>
               <argument key="fos_user_change_password">fos_user.change_password.form.type</argument>
               <argument key="fos_user_resetting">fos_user.resetting.form.type</argument>
+              <argument key="acme_user_registration">labella.registration.form.type</argument>
             </argument>
             <argument type="collection">
               <argument key="form" type="collection">
@@ -1807,12 +1811,12 @@
         <argument>FOS\UserBundle\EventListener\ResettingListener</argument>
       </call>
       <call method="addSubscriberService">
-        <argument>debug.dump_listener</argument>
-        <argument>Symfony\Component\HttpKernel\EventListener\DumpListener</argument>
+        <argument>labella.registration_completed.listener</argument>
+        <argument>Prophetz\UserBundle\EventListener\RegistrationListener</argument>
       </call>
       <call method="addSubscriberService">
-        <argument>web_profiler.debug_toolbar</argument>
-        <argument>Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</argument>
+        <argument>debug.dump_listener</argument>
+        <argument>Symfony\Component\HttpKernel\EventListener\DumpListener</argument>
       </call>
     </service>
     <service id="debug.controller_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableControllerResolver">
@@ -1850,7 +1854,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>554c255b38c04</argument>
+            <argument>555c34c323589</argument>
           </service>
         </argument>
       </argument>
@@ -2024,17 +2028,7 @@
                 <argument type="service" id="router" on-invalid="null"/>
               </service>
             </argument>
-            <argument type="service">
-              <service class="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" public="false">
-                <argument type="service">
-                  <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
-                    <argument type="service" id="router" on-invalid="null"/>
-                    <argument type="service" id="router" on-invalid="null"/>
-                  </service>
-                </argument>
-                <argument>/</argument>
-              </service>
-            </argument>
+            <argument type="service" id="authentication_handler"/>
             <argument type="collection">
               <argument key="csrf_parameter">_csrf_token</argument>
               <argument key="intention">logout</argument>
@@ -2061,47 +2055,27 @@
             </argument>
             <argument>main</argument>
             <argument type="service">
-              <service class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler" public="false">
-                <argument type="service">
-                  <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
-                    <argument type="service" id="router" on-invalid="null"/>
-                    <argument type="service" id="router" on-invalid="null"/>
-                  </service>
+              <service class="Symfony\Component\Security\Http\Authentication\CustomAuthenticationSuccessHandler" public="false">
+                <argument type="service" id="authentication_handler"/>
+                <argument type="collection">
+                  <argument key="login_path">/</argument>
+                  <argument key="always_use_default_target_path">false</argument>
+                  <argument key="default_target_path">/</argument>
+                  <argument key="target_path_parameter">_target_path</argument>
+                  <argument key="use_referer">false</argument>
                 </argument>
-                <argument type="collection"/>
-                <call method="setOptions">
-                  <argument type="collection">
-                    <argument key="always_use_default_target_path">false</argument>
-                    <argument key="default_target_path">/</argument>
-                    <argument key="login_path">/login</argument>
-                    <argument key="target_path_parameter">_target_path</argument>
-                    <argument key="use_referer">false</argument>
-                  </argument>
-                </call>
-                <call method="setProviderKey">
-                  <argument>main</argument>
-                </call>
+                <argument>main</argument>
               </service>
             </argument>
             <argument type="service">
-              <service class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler" public="false">
-                <argument type="service" id="http_kernel"/>
-                <argument type="service">
-                  <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
-                    <argument type="service" id="router" on-invalid="null"/>
-                    <argument type="service" id="router" on-invalid="null"/>
-                  </service>
+              <service class="Symfony\Component\Security\Http\Authentication\CustomAuthenticationFailureHandler" public="false">
+                <argument type="service" id="authentication_handler"/>
+                <argument type="collection">
+                  <argument key="login_path">/</argument>
+                  <argument key="failure_path">null</argument>
+                  <argument key="failure_forward">false</argument>
+                  <argument key="failure_path_parameter">_failure_path</argument>
                 </argument>
-                <argument type="collection"/>
-                <argument type="service" id="monolog.logger.security" on-invalid="null"/>
-                <call method="setOptions">
-                  <argument type="collection">
-                    <argument key="login_path">/login</argument>
-                    <argument key="failure_path">null</argument>
-                    <argument key="failure_forward">false</argument>
-                    <argument key="failure_path_parameter">_failure_path</argument>
-                  </argument>
-                </call>
               </service>
             </argument>
             <argument type="collection">
@@ -2122,7 +2096,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>554c255b38c04</argument>
+            <argument>555c34c323589</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2204,11 +2178,11 @@
                   <argument type="service" id="router" on-invalid="null"/>
                 </service>
               </argument>
-              <argument>/login</argument>
+              <argument>/</argument>
               <argument>false</argument>
             </service>
           </argument>
-          <argument>null</argument>
+          <argument>/</argument>
           <argument>null</argument>
           <argument type="service" id="monolog.logger.security" on-invalid="null"/>
         </service>
@@ -2635,6 +2609,8 @@
           <call method="setEntityNamespaces">
             <argument type="collection">
               <argument key="AppBundle">AppBundle\Entity</argument>
+              <argument key="ProphetzUserBundle">Prophetz\UserBundle\Entity</argument>
+              <argument key="UloginAuthBundle">Ulogin\AuthBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2655,10 +2631,36 @@
                       <argument type="service" id="annotation_reader"/>
                       <argument type="collection">
                         <argument>/Users/olga/Desktop/kursach/src/AppBundle/Entity</argument>
+                        <argument>/Users/olga/Desktop/kursach/src/Prophetz/UserBundle/Entity</argument>
                       </argument>
                     </service>
                   </argument>
                   <argument>AppBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/Users/olga/Desktop/kursach/src/AppBundle/Entity</argument>
+                        <argument>/Users/olga/Desktop/kursach/src/Prophetz/UserBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Prophetz\UserBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/Users/olga/Desktop/kursach/src/Ulogin/AuthBundle/Resources/config/doctrine">Ulogin\AuthBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Ulogin\AuthBundle\Entity</argument>
                 </call>
                 <call method="addDriver">
                   <argument type="service">
@@ -2760,7 +2762,7 @@
       <argument type="service" id="fos_user.user_manager"/>
     </service>
     <service id="fos_user.security.login_manager" class="FOS\UserBundle\Security\LoginManager">
-      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.context"/>
       <argument type="service" id="security.user_checker"/>
       <argument type="service" id="security.authentication.session_strategy"/>
       <argument type="service" id="service_container"/>
@@ -2845,6 +2847,20 @@
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="router"/>
       <argument>86400</argument>
+    </service>
+    <service id="labella.registration.form.type" class="Prophetz\UserBundle\Form\Type\RegistrationFormType">
+      <tag name="form.type" alias="acme_user_registration"/>
+      <argument>AppBundle\Entity\User</argument>
+    </service>
+    <service id="labella.registration_completed.listener" class="Prophetz\UserBundle\EventListener\RegistrationListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="authentication_handler" class="Prophetz\UserBundle\Handler\AuthenticationHandler">
+      <argument type="service" id="router"/>
+      <argument type="service" id="security.context"/>
+      <argument type="service" id="fos_user.user_manager"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
@@ -2938,15 +2954,6 @@
       <argument type="service" id="profiler" on-invalid="null"/>
       <argument type="service" id="twig"/>
       <argument>true</argument>
-    </service>
-    <service id="web_profiler.debug_toolbar" class="Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="twig"/>
-      <argument>false</argument>
-      <argument>2</argument>
-      <argument>bottom</argument>
-      <argument type="service" id="router" on-invalid="ignore"/>
-      <argument>^/bundles|^/_wdt</argument>
     </service>
     <service id="sensio_distribution.webconfigurator" class="Sensio\Bundle\DistributionBundle\Configurator\Configurator">
       <argument>/Users/olga/Desktop/kursach/app</argument>
@@ -3219,6 +3226,14 @@
       <call method="addPath">
         <argument>/Users/olga/Desktop/kursach/src/AdminBundle/Resources/views</argument>
         <argument>Admin</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Users/olga/Desktop/kursach/src/Prophetz/UserBundle/Resources/views</argument>
+        <argument>ProphetzUser</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Users/olga/Desktop/kursach/src/Ulogin/AuthBundle/Resources/views</argument>
+        <argument>UloginAuth</argument>
       </call>
       <call method="addPath">
         <argument>/Users/olga/Desktop/kursach/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>

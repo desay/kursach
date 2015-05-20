@@ -1,0 +1,18 @@
+services:
+    labella.registration.form.type:
+        class: Prophetz\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: acme_user_registration }
+
+
+    labella.registration_completed.listener:
+        class: Prophetz\UserBundle\EventListener\RegistrationListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+    authentication_handler:
+        class:        Prophetz\UserBundle\Handler\AuthenticationHandler
+        arguments:    [@router, @security.context, @fos_user.user_manager, @service_container]

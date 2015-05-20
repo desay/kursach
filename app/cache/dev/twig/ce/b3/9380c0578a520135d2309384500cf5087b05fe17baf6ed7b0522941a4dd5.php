@@ -8,7 +8,15 @@ class __TwigTemplate_ceb39380c0578a520135d2309384500cf5087b05fe17baf6ed7b0522941
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main_admin.html.twig", "@Admin/index.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main_admin.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -231,6 +239,6 @@ $context["news"], "status", array()) == 1)) {
 
     public function getDebugInfo()
     {
-        return array (  216 => 108,  213 => 107,  206 => 15,  203 => 14,  178 => 84,  162 => 74,  156 => 71,  147 => 65,  141 => 62,  137 => 61,  133 => 59,  129 => 57,  127 => 56,  124 => 55,  122 => 54,  117 => 52,  113 => 51,  109 => 50,  106 => 49,  102 => 48,  78 => 27,  72 => 26,  67 => 24,  61 => 23,  53 => 17,  51 => 14,  44 => 9,  41 => 8,  34 => 4,  31 => 3,  11 => 1,);
+        return array (  224 => 108,  221 => 107,  214 => 15,  211 => 14,  186 => 84,  170 => 74,  164 => 71,  155 => 65,  149 => 62,  145 => 61,  141 => 59,  137 => 57,  135 => 56,  132 => 55,  130 => 54,  125 => 52,  121 => 51,  117 => 50,  114 => 49,  110 => 48,  86 => 27,  80 => 26,  75 => 24,  69 => 23,  61 => 17,  59 => 14,  52 => 9,  49 => 8,  42 => 4,  39 => 3,  11 => 1,);
     }
 }

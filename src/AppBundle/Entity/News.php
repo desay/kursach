@@ -38,14 +38,14 @@ class News
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_create", type="datetime")
+     * @ORM\Column(name="date_create", type="date", nullable=true)
      */
     private $dateCreate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_update", type="datetime")
+     * @ORM\Column(name="date_update", type="date", nullable=true)
      */
     private $dateUpdate;
 
@@ -80,7 +80,7 @@ class News
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -103,7 +103,7 @@ class News
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -126,7 +126,7 @@ class News
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -149,7 +149,7 @@ class News
     /**
      * Get dateCreate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateCreate()
     {
@@ -172,7 +172,7 @@ class News
     /**
      * Get dateUpdate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateUpdate()
     {
@@ -195,7 +195,7 @@ class News
     /**
      * Get views
      *
-     * @return integer 
+     * @return integer
      */
     public function getViews()
     {

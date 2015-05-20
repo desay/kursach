@@ -8,7 +8,15 @@ class __TwigTemplate_602c3d88ff14ad8121b3b3c4c1333d8e9f7981fc1250f8f46b159f3e9fe
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main_admin.html.twig", "@Admin/trainings.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main_admin.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -207,6 +215,6 @@ class __TwigTemplate_602c3d88ff14ad8121b3b3c4c1333d8e9f7981fc1250f8f46b159f3e9fe
 
     public function getDebugInfo()
     {
-        return array (  192 => 102,  189 => 101,  182 => 15,  179 => 14,  153 => 77,  137 => 67,  131 => 64,  122 => 58,  116 => 55,  112 => 54,  106 => 51,  102 => 50,  98 => 49,  95 => 48,  91 => 47,  68 => 27,  62 => 24,  53 => 17,  51 => 14,  44 => 9,  41 => 8,  34 => 4,  31 => 3,  11 => 1,);
+        return array (  200 => 102,  197 => 101,  190 => 15,  187 => 14,  161 => 77,  145 => 67,  139 => 64,  130 => 58,  124 => 55,  120 => 54,  114 => 51,  110 => 50,  106 => 49,  103 => 48,  99 => 47,  76 => 27,  70 => 24,  61 => 17,  59 => 14,  52 => 9,  49 => 8,  42 => 4,  39 => 3,  11 => 1,);
     }
 }

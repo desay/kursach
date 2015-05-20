@@ -8,7 +8,15 @@ class __TwigTemplate_f5f5c18149a6e2fe6a4e1ef4697343c0b57ec0a6749330ed376a6cbd510
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("TwigBundle::layout.html.twig", "TwigBundle:Exception:exception_full.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("TwigBundle::layout.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'head' => array($this, 'block_head'),
             'title' => array($this, 'block_title'),
@@ -55,7 +63,7 @@ class __TwigTemplate_f5f5c18149a6e2fe6a4e1ef4697343c0b57ec0a6749330ed376a6cbd510
     {
         // line 12
         echo "    ";
-        $this->loadTemplate("TwigBundle:Exception:exception.html.twig", "TwigBundle:Exception:exception_full.html.twig", 12)->display($context);
+        $this->env->loadTemplate("TwigBundle:Exception:exception.html.twig")->display($context);
     }
 
     public function getTemplateName()
@@ -70,6 +78,6 @@ class __TwigTemplate_f5f5c18149a6e2fe6a4e1ef4697343c0b57ec0a6749330ed376a6cbd510
 
     public function getDebugInfo()
     {
-        return array (  57 => 12,  54 => 11,  43 => 8,  40 => 7,  33 => 4,  30 => 3,  11 => 1,);
+        return array (  65 => 12,  62 => 11,  51 => 8,  48 => 7,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

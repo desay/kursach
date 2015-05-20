@@ -29,13 +29,6 @@ class Comment
     private $text;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="owner_id", type="integer")
-     */
-    private $ownerId;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_create", type="datetime")
@@ -55,6 +48,13 @@ class Comment
      * @ORM\ManyToOne(targetEntity="News", inversedBy="comments")
      */
     private $news;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
+     */
+    private $user;
 
 
     /**
@@ -88,29 +88,6 @@ class Comment
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set ownerId
-     *
-     * @param integer $ownerId
-     * @return Comment
-     */
-    public function setOwnerId($ownerId)
-    {
-        $this->ownerId = $ownerId;
-
-        return $this;
-    }
-
-    /**
-     * Get ownerId
-     *
-     * @return integer 
-     */
-    public function getOwnerId()
-    {
-        return $this->ownerId;
     }
 
     /**
@@ -173,6 +150,22 @@ class Comment
     public function setNews($news)
     {
         $this->news = $news;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 

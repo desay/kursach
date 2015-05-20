@@ -8,7 +8,15 @@ class __TwigTemplate_ccac8ac2800cdad24c7f38b1bcc0a50587845d34679eb37bd2de9ab3f29
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main.html.twig", "@App/News/news.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -40,56 +48,37 @@ class __TwigTemplate_ccac8ac2800cdad24c7f38b1bcc0a50587845d34679eb37bd2de9ab3f29
     public function block_content($context, array $blocks = array())
     {
         // line 8
-        echo "    <header>
-        <div class=\"headerDiv\">
-            <div class=\"upperHeader\">
-                <h1><span class=\"logo\">BodyLanguage</span><span class=\"hideEl\"> - </span><span>тренинги публичных выступлений</span></h1>
-                <p class=\"signIn\">Вход/Регистрация</p>
-                <i class=\"fa fa-bars\"></i>
-            </div>
-            <nav>
-                <ul>
-                    <li class=\"link\"><a id=\"mainLink\" href=\"index.html\">Главная</a></li>
-                    <li class=\"link\"><a class=\"current\" href=\"news.html\" id=\"newsLink\">Новости</a></li>
-                    <li class=\"link\"><a href=\"description.html\" id=\"descriptionLink\">Описание тренингов</a></li>
-                    <li class=\"link\"><a href=\"success.html\" id=\"successLink\">История успеха</a></li>
-                    <li class=\"link\"><a href=\"contacts.html\" id=\"contactsLink\">Контакты</a></li>
-                    <p class=\"signIn\">Вход/Регистрация</p>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+        echo "
     <main>
         <div class=\"content\">
             <h2>Последние новости</h2>
 
                 ";
-        // line 32
+        // line 13
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($context["news"]);
         foreach ($context['_seq'] as $context["_key"] => $context["news"]) {
-            // line 33
+            // line 14
             echo "            <div class=\"block\">
                     ";
-            // line 34
+            // line 15
             if (($this->getAttribute($context["news"], "image", array()) != "")) {
-                // line 35
+                // line 16
                 echo "                   <img src=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["news"], "image", array()), "html", null, true);
                 echo "\" style=\"width:100px; height:100px\" class=\"img-circle\">
                     ";
             }
-            // line 37
+            // line 18
             echo "                <article>
                     <h3 class=\"link\"><a href=\"";
-            // line 38
+            // line 19
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("news_item", array("id" => $this->getAttribute($context["news"], "id", array()))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["news"], "title", array()), "html", null, true);
             echo "</a></h3>
                     <p class=\"shortText\">";
-            // line 39
+            // line 20
             echo twig_escape_filter($this->env, $this->getAttribute($context["news"], "description", array()), "html", null, true);
             echo "</p>
                     <p class=\"date\">01.04.2015</p>
@@ -100,7 +89,7 @@ class __TwigTemplate_ccac8ac2800cdad24c7f38b1bcc0a50587845d34679eb37bd2de9ab3f29
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['news'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
+        // line 25
         echo "
 
 
@@ -110,10 +99,10 @@ class __TwigTemplate_ccac8ac2800cdad24c7f38b1bcc0a50587845d34679eb37bd2de9ab3f29
 ";
     }
 
-    // line 52
+    // line 33
     public function block_footer($context, array $blocks = array())
     {
-        // line 53
+        // line 34
         echo "    ";
         $this->displayParentBlock("footer", $context, $blocks);
         echo "
@@ -132,6 +121,6 @@ class __TwigTemplate_ccac8ac2800cdad24c7f38b1bcc0a50587845d34679eb37bd2de9ab3f29
 
     public function getDebugInfo()
     {
-        return array (  117 => 53,  114 => 52,  104 => 44,  93 => 39,  87 => 38,  84 => 37,  78 => 35,  76 => 34,  73 => 33,  69 => 32,  43 => 8,  40 => 7,  33 => 4,  30 => 3,  11 => 1,);
+        return array (  106 => 34,  103 => 33,  93 => 25,  82 => 20,  76 => 19,  73 => 18,  67 => 16,  65 => 15,  62 => 14,  58 => 13,  51 => 8,  48 => 7,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

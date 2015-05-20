@@ -21,16 +21,16 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
     {
         // line 1
         $this->displayBlock('header', $context, $blocks);
-        // line 16
+        // line 36
         echo "
 ";
-        // line 17
+        // line 37
         $this->displayBlock('content', $context, $blocks);
-        // line 54
+        // line 74
         echo "
 
 ";
-        // line 56
+        // line 76
         $this->displayBlock('footer', $context, $blocks);
     }
 
@@ -43,64 +43,96 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
 <head>
     <meta charset=\"utf-8\">
     <title>BodyLanguage - тренинги публичных выступлений</title>
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"style/html5reset-1.6.1.css\">
-    <link rel=\"stylesheet\" href=\"fonts/font-awesome-4.3.0/css/font-awesome.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"style/style.css\">
-    <link href=\"style/mediaqueries.css\" rel=\"stylesheet\" type=\"text/css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"/style/html5reset-1.6.1.css\">
+    <link rel=\"stylesheet\" href=\"/fonts/font-awesome-4.3.0/css/font-awesome.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"/style/style.css\">
+    <link href=\"/style/mediaqueries.css\" rel=\"stylesheet\" type=\"text/css\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\">
 </head>
 <body>
 
+<header>
+    <div class=\"headerDiv\">
+        <div class=\"upperHeader\">
+            <h1><span class=\"logo\">BodyLanguage</span><span class=\"hideEl\"> - </span><span>тренинги публичных выступлений</span></h1>
+            <p class=\"signIn\"><a href=\"";
+        // line 19
+        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
+        echo "\">Вход/Регистрация</a></p>
+            <i class=\"fa fa-bars\"></i>
+        </div>
+        <nav>
+            <ul>
+                <li class=\"link\"><a class=\"current\" id=\"mainLink\" href=\"";
+        // line 24
+        echo $this->env->getExtension('routing')->getPath("index");
+        echo "\">Главная</a></li>
+                <li class=\"link\"><a href=\"";
+        // line 25
+        echo $this->env->getExtension('routing')->getPath("news");
+        echo "\">Новости</a></li>
+                <li class=\"link\"><a href=\"";
+        // line 26
+        echo $this->env->getExtension('routing')->getPath("trainings");
+        echo "\" id=\"descriptionLink\">Описание тренингов</a></li>
+                <li class=\"link\"><a href=\"success.html\" id=\"successLink\">История успеха</a></li>
+                <li class=\"link\"><a href=\"contacts.html\" id=\"contactsLink\">Контакты</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
 ";
     }
 
-    // line 17
+    // line 37
     public function block_content($context, array $blocks = array())
     {
-        // line 18
+        // line 38
         echo "
 
     ";
-        // line 20
+        // line 40
         $this->displayBlock('admin_menu', $context, $blocks);
-        // line 52
+        // line 72
         echo "
 ";
     }
 
-    // line 20
+    // line 40
     public function block_admin_menu($context, array $blocks = array())
     {
-        // line 21
+        // line 41
         echo "
         <div class=\"span3\">
             <div class=\"well sidebar-nav\">
                 <ul class=\"nav nav-list\">
                     <li class=\"nav-header\">Привет ";
-        // line 25
+        // line 45
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "username", array()), "html", null, true);
         echo " !</li>
                     <li><a href=\"";
-        // line 26
+        // line 46
         echo $this->env->getExtension('routing')->getPath("admin_index");
         echo "\"><i class=\"icon-home\"></i> Домой</a></li>
                     <li><a href=\"account.html\"><i class=\"icon-user\"></i> Mой аккаунт</a></li>
 
                     <li><a href=\"";
-        // line 29
+        // line 49
         echo $this->env->getExtension('routing')->getPath("admin_index");
         echo "\"><i class=\"icon-file\"></i> Список новостей</a></li>
                     <li><a href=\"";
-        // line 30
+        // line 50
         echo $this->env->getExtension('routing')->getPath("admin_index_trainings");
         echo "\"><i class=\"icon-file\"></i> Список курсов</a></li>
 
                     <li><a href=\"";
-        // line 32
+        // line 52
         echo $this->env->getExtension('routing')->getPath("admin_news_add");
         echo "\"><i class=\"icon-file\"></i> Создать новость</a></li>
                     <li><a href=\"";
-        // line 33
+        // line 53
         echo $this->env->getExtension('routing')->getPath("admin_trainings_add");
         echo "\"><i class=\"icon-file\"></i> Создать курс</a></li>
 
@@ -123,24 +155,24 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
     ";
     }
 
-    // line 56
+    // line 76
     public function block_footer($context, array $blocks = array())
     {
-        // line 57
+        // line 77
         echo "
 <footer>
     <ul>
         <li>© 2015 Alexandra Govorkova</li>
-        <li class=\"link\"><a href=\"contacts.html\" id=\"contactsLink\">Контакты</a></li>
-        <li class=\"link\"><a href=\"description.html\" id=\"descriptionLink\">Описание тренингов</a></li>
-        <li class=\"link\"><a href=\"success.html\" id=\"successLink\">История успеха</a></li>
+        <li class=\"link\"><a href=\"/contacts.html\" id=\"contactsLink\">Контакты</a></li>
+        <li class=\"link\"><a href=\"/description.html\" id=\"descriptionLink\">Описание тренингов</a></li>
+        <li class=\"link\"><a href=\"/success.html\" id=\"successLink\">История успеха</a></li>
     </ul>
 </footer>
 
 <!-- <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script> -->
-<script type=\"text/javascript\" src=\"scripts/jquery-2.1.3.js\"></script>
-<script type=\"text/javascript\" src=\"node_modules/html5-history-api/history.js\"></script>
-<script type=\"text/javascript\" src=\"scripts/script.js\"></script>
+<script type=\"text/javascript\" src=\"/scripts/jquery-2.1.3.js\"></script>
+<script type=\"text/javascript\" src=\"/node_modules/html5-history-api/history.js\"></script>
+<script type=\"text/javascript\" src=\"/scripts/script.js\"></script>
 </body>
 </html>
 ";
@@ -153,6 +185,6 @@ class __TwigTemplate_d459cd341c6c71fef6186d6fc41395aee3fc3e69bc3a1017678e53a9482
 
     public function getDebugInfo()
     {
-        return array (  130 => 57,  127 => 56,  104 => 33,  100 => 32,  95 => 30,  91 => 29,  85 => 26,  81 => 25,  75 => 21,  72 => 20,  67 => 52,  65 => 20,  61 => 18,  58 => 17,  41 => 2,  38 => 1,  34 => 56,  30 => 54,  28 => 17,  25 => 16,  23 => 1,);
+        return array (  162 => 77,  159 => 76,  136 => 53,  132 => 52,  127 => 50,  123 => 49,  117 => 46,  113 => 45,  107 => 41,  104 => 40,  99 => 72,  97 => 40,  93 => 38,  90 => 37,  76 => 26,  72 => 25,  68 => 24,  60 => 19,  41 => 2,  38 => 1,  34 => 76,  30 => 74,  28 => 37,  25 => 36,  23 => 1,);
     }
 }

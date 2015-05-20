@@ -1,57 +1,42 @@
 {% extends "@App/Main/main.html.twig" %}
 
+{% block header %}
+    {{ parent() }}
+{% endblock header %}
 
-
-<header id="">
 {% block content %}
-    <div class="container">
-        <div class="row">
 
-            <div class="col-md-12">
+    <main>
+        <div class="content fullContent">
+            <h2>{{ news.title }}</h2>
+            <article>
+                {% if news.image != '' %}
+                    <div data-url="{{ news.image }}" class="imageOpen"></div>
+                {% endif %}
+                {{ news.description }}
+            </article>
 
-                <div class="panel">
-                    <div class="panel-body">
+            <h2>Комментарии:</h2>
 
-                        <!--/stories-->
-                        <div class="row">
-                            <br>
-                            {% if news.image != '' %}
-                            <div class="col-md-2 col-sm-3 text-center">
-                                <a class="story-img" href="#"><img src="{{ news.image }}" style="width:100px;height:100px" class="img-circle"></a>
-                            </div>
-                            {% endif %}
-                            <div class="col-md-10 col-sm-9">
-                                <h3>{{ news.title }}</h3>
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p>{{ news.description }}</p>
-                                        <p class="lead"><button class="btn btn-default">Read More</button></p>
-                                        <ul class="list-inline"><li><a href="#">{{ news.dateCreate|date('d.m.Y')}}</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> {{ news.comments|length }} Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 34 Shares</a></li></ul>
-                                    </div>
-                                    <div class="col-xs-3"></div>
-                                </div>
-                                <br><br>
-                            </div>
-                        </div>
-                        <hr>
+            {% for comment in news.comments %}
+                {{ comment.text }}
+                <br /><br /><br />
+            {% endfor %}
 
-                    </div>
-                </div>
+            {% if news.comments|length == 0 %}
+                Нет комментариев
+            {% endif %}
 
+            <h2>Добавить комментарий:</h2>
+            {{ form_start(commentForm) }}
+            {{ form_widget(commentForm) }}
+            {{ form_end(commentForm) }}
 
-                {% for comment in news.comments %}
-
-                    {{ comment.text }}
-                    <br />
-
-                {% endfor %}
-
-
-
-            </div><!--/col-12-->
         </div>
-    </div>
-</header>
+    </main>
+
+
+
 {% endblock content %}
 
 {% block footer %}

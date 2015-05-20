@@ -8,7 +8,15 @@ class __TwigTemplate_b03ff314242834b49ef570629535c7df1608814db5e7aeb5e25489163cf
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main.html.twig", "@App/index.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -41,49 +49,23 @@ class __TwigTemplate_b03ff314242834b49ef570629535c7df1608814db5e7aeb5e25489163cf
     {
         // line 8
         echo "
-    <header>
-        <div class=\"headerDiv\">
-            <div class=\"upperHeader\">
-                <h1><span class=\"logo\">BodyLanguage</span><span class=\"hideEl\"> - </span><span>тренинги публичных выступлений</span></h1>
-                <p class=\"\"><a href=\"";
-        // line 13
-        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
-        echo "\">Вход/Регистрация</a></p>
-                <i class=\"fa fa-bars\"></i>
-            </div>
-            <nav>
-                <ul>
-                    <li class=\"link\"><a class=\"current\" id=\"mainLink\" href=\"index.html\">Главная</a></li>
-                    <li class=\"link\"><a href=\"";
-        // line 19
-        echo $this->env->getExtension('routing')->getPath("news");
-        echo "\">Новости</a></li>
-                    <li class=\"link\"><a href=\"description.html\" id=\"descriptionLink\">Описание тренингов</a></li>
-                    <li class=\"link\"><a href=\"success.html\" id=\"successLink\">История успеха</a></li>
-                    <li class=\"link\"><a href=\"contacts.html\" id=\"contactsLink\">Контакты</a></li>
-
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <div id=\"mainImg\"></div>
 
         <div class=\"results\">
             <div class=\"resultsDiv\">
                 <div class=\"result\">
-                    <img class=\"icon\" src=\"icons/iconmonstr-microphone-5-icon.svg\">
+                    <img class=\"icon\" src=\"/icons/iconmonstr-microphone-5-icon.svg\">
                     <h3>Выступайте</h3>
                     <p>Вдохновляйте и меняйте мнение как единичного слушателя, так и самой большой толпы.</p>
                 </div>
                 <div class=\"result\">
-                    <img class=\"icon\" src=\"icons/iconmonstr-coin-10-icon.svg\">
+                    <img class=\"icon\" src=\"/icons/iconmonstr-coin-10-icon.svg\">
                     <h3>Продавайте</h3>
                     <p>Вселяйте уверенность и убеждайте даже самых сложных покупателей.</p>
                 </div>
                 <div class=\"result\">
-                    <img class=\"icon\" src=\"icons/iconmonstr-speech-bubble-14-icon.svg\">
+                    <img class=\"icon\" src=\"/icons/iconmonstr-speech-bubble-14-icon.svg\">
                     <h3>Общайтесь</h3>
                     <p>Доносите свою мысль до собеседника красиво и точно.</p>
                 </div>
@@ -91,57 +73,48 @@ class __TwigTemplate_b03ff314242834b49ef570629535c7df1608814db5e7aeb5e25489163cf
         </div>
 
         <div class=\"content\">
-            <h2 class=\"link\"><a href=\"news.html\" id=\"newsLink\">Последние новости</a></h2>
-            <div class=\"block\">
-                <div class=\"imageDiv\"></div>
-                <article>
-                    <h3 class=\"link\"><a href=\"\">Tile Title</a></h3>
-                    <p class=\"shortText\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sapien at dolor accumsan maximus. Ut mattis congue aliquet. Quisque blandit libero a urna cursus consequat. Donec dapibus sit amet mi ac congue. Phasellus vehicula pellentesque nulla. Vivamus fermentum mauris ligula, a hendrerit velit aliquam id. Nam sagittis nec sem in consequat. Quisque vulputate consectetur mi quis rutrum. Suspendisse pellentesque enim nec auctor dignissim. Etiam sodales, nibh ut dignissim sagittis, dolor lacus blandit neque, nec fringilla nunc massa sit amet mi. Fusce nulla enim, semper at felis id, vehicula condimentum eros. Praesent vitae metus vestibulum, consequat ex ac, auctor lorem.</p>
-                    <p class=\"date\">01.04.2015</p>
+            <h2 class=\"link\"><a href=\"/news\" id=\"newsLink\">Последние новости</a></h2>
+
+            ";
+        // line 35
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($context["news"]);
+        foreach ($context['_seq'] as $context["_key"] => $context["news"]) {
+            // line 36
+            echo "            <div class=\"block\">
+                <div class=\"imageDiv\"></div>";
+            // line 38
+            echo "                <article>
+                    <h3 class=\"link\"><a href=\"\">";
+            // line 39
+            echo twig_escape_filter($this->env, $this->getAttribute($context["news"], "title", array()), "html", null, true);
+            echo "</a></h3>
+                    <p class=\"shortText\">";
+            // line 40
+            echo twig_escape_filter($this->env, $this->getAttribute($context["news"], "description", array()), "html", null, true);
+            echo "</p>
+                    <p class=\"date\">";
+            // line 41
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["news"], "dateCreate", array()), "d.m.Y"), "html", null, true);
+            echo "</p>
                 </article>
             </div>
-            <div class=\"block\">
-                <div class=\"imageDiv\"></div>
-                <article>
-                    <h3 class=\"link\"><a href=\"\">Tile Title</a></h3>
-                    <p class=\"shortText\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sapien at dolor accumsan maximus. Ut mattis congue aliquet. Quisque blandit libero a urna cursus consequat. Donec dapibus sit amet mi ac congue. Phasellus vehicula pellentesque nulla. Vivamus fermentum mauris ligula, a hendrerit velit aliquam id. Nam sagittis nec sem in consequat. Quisque vulputate consectetur mi quis rutrum. Suspendisse pellentesque enim nec auctor dignissim. Etiam sodales, nibh ut dignissim sagittis, dolor lacus blandit neque, nec fringilla nunc massa sit amet mi. Fusce nulla enim, semper at felis id, vehicula condimentum eros. Praesent vitae metus vestibulum, consequat ex ac, auctor lorem.</p>
-                    <p class=\"date\">01.04.2015</p>
-                </article>
-            </div>
-            <div class=\"block\">
-                <div class=\"imageDiv\"></div>
-                <article>
-                    <h3 class=\"link\"><a href=\"\">Tile Title</a></h3>
-                    <p class=\"shortText\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sapien at dolor accumsan maximus. Ut mattis congue aliquet. Quisque blandit libero a urna cursus consequat. Donec dapibus sit amet mi ac congue. Phasellus vehicula pellentesque nulla. Vivamus fermentum mauris ligula, a hendrerit velit aliquam id. Nam sagittis nec sem in consequat. Quisque vulputate consectetur mi quis rutrum. Suspendisse pellentesque enim nec auctor dignissim. Etiam sodales, nibh ut dignissim sagittis, dolor lacus blandit neque, nec fringilla nunc massa sit amet mi. Fusce nulla enim, semper at felis id, vehicula condimentum eros. Praesent vitae metus vestibulum, consequat ex ac, auctor lorem.</p>
-                    <p class=\"date\">01.04.2015</p>
-                </article>
-            </div>
-            <div class=\"block\">
-                <div class=\"imageDiv\"></div>
-                <article>
-                    <h3 class=\"link\"><a href=\"\">Tile Title</a></h3>
-                    <p class=\"shortText\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sapien at dolor accumsan maximus. Ut mattis congue aliquet. Quisque blandit libero a urna cursus consequat. Donec dapibus sit amet mi ac congue. Phasellus vehicula pellentesque nulla. Vivamus fermentum mauris ligula, a hendrerit velit aliquam id. Nam sagittis nec sem in consequat. Quisque vulputate consectetur mi quis rutrum. Suspendisse pellentesque enim nec auctor dignissim. Etiam sodales, nibh ut dignissim sagittis, dolor lacus blandit neque, nec fringilla nunc massa sit amet mi. Fusce nulla enim, semper at felis id, vehicula condimentum eros. Praesent vitae metus vestibulum, consequat ex ac, auctor lorem.</p>
-                    <p class=\"date\">01.04.2015</p>
-                </article>
-            </div>
-            <div class=\"block\">
-                <div class=\"imageDiv\"></div>
-                <article>
-                    <h3 class=\"link\"><a href=\"\">Tile Title</a></h3>
-                    <p class=\"shortText\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sapien at dolor accumsan maximus. Ut mattis congue aliquet. Quisque blandit libero a urna cursus consequat. Donec dapibus sit amet mi ac congue. Phasellus vehicula pellentesque nulla. Vivamus fermentum mauris ligula, a hendrerit velit aliquam id. Nam sagittis nec sem in consequat. Quisque vulputate consectetur mi quis rutrum. Suspendisse pellentesque enim nec auctor dignissim. Etiam sodales, nibh ut dignissim sagittis, dolor lacus blandit neque, nec fringilla nunc massa sit amet mi. Fusce nulla enim, semper at felis id, vehicula condimentum eros. Praesent vitae metus vestibulum, consequat ex ac, auctor lorem.</p>
-                    <p class=\"date\">01.04.2015</p>
-                </article>
-            </div>
-        </div>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['news'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 45
+        echo "        </div>
     </main>
 
 ";
     }
 
-    // line 99
+    // line 50
     public function block_footer($context, array $blocks = array())
     {
-        // line 100
+        // line 51
         echo "    ";
         $this->displayParentBlock("footer", $context, $blocks);
         echo "
@@ -160,6 +133,6 @@ class __TwigTemplate_b03ff314242834b49ef570629535c7df1608814db5e7aeb5e25489163cf
 
     public function getDebugInfo()
     {
-        return array (  145 => 100,  142 => 99,  59 => 19,  50 => 13,  43 => 8,  40 => 7,  33 => 4,  30 => 3,  11 => 1,);
+        return array (  118 => 51,  115 => 50,  108 => 45,  98 => 41,  94 => 40,  90 => 39,  87 => 38,  84 => 36,  80 => 35,  51 => 8,  48 => 7,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

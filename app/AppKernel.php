@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new AdminBundle\AdminBundle(),
+            new \Prophetz\UserBundle\ProphetzUserBundle(),
+            new Ulogin\AuthBundle\UloginAuthBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

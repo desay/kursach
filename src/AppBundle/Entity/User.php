@@ -18,6 +18,13 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var Comment[]
+     *
+     * @ORM\OneToMany(targetEntity="Comment", cascade={"all"}, mappedBy="user")
+     */
+    private $comments;
+
     public function __construct()
     {
         parent::__construct();
@@ -34,7 +41,24 @@ class User extends BaseUser
     {
         return array(
             'id' => $this->getId(),
-            'email' => $this->getEmail()
+            'email' => $this->getEmail(),
+            'roles' => $this->getRoles()
         );
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment[] $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 }

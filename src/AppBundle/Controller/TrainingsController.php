@@ -18,5 +18,4 @@ class TrainingsController extends Controller
 
         return $this->render('@App/Trainings/trainings.html.twig', array('trainings' => $trainings));
     }
-
 }

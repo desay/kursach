@@ -8,7 +8,15 @@ class __TwigTemplate_013560b10ecd6879d57e12bea0b2117ac2c62033003312107f170749147
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@App/Main/main.html.twig", "@App/Trainings/trainings.html.twig", 1);
+        try {
+            $this->parent = $this->env->loadTemplate("@App/Main/main.html.twig");
+        } catch (Twig_Error_Loader $e) {
+            $e->setTemplateFile($this->getTemplateName());
+            $e->setTemplateLine(1);
+
+            throw $e;
+        }
+
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'content' => array($this, 'block_content'),
@@ -130,6 +138,6 @@ class __TwigTemplate_013560b10ecd6879d57e12bea0b2117ac2c62033003312107f170749147
 
     public function getDebugInfo()
     {
-        return array (  115 => 53,  112 => 52,  100 => 42,  84 => 32,  78 => 29,  75 => 28,  69 => 25,  66 => 24,  64 => 23,  58 => 19,  54 => 18,  43 => 9,  40 => 8,  33 => 4,  30 => 3,  11 => 1,);
+        return array (  123 => 53,  120 => 52,  108 => 42,  92 => 32,  86 => 29,  83 => 28,  77 => 25,  74 => 24,  72 => 23,  66 => 19,  62 => 18,  51 => 9,  48 => 8,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

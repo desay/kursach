@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+
+    <form name="loginForm" class="form upper" id="userLoginForm" method="post">
+        <h3>Вход</h3>
+        <p><i class="fa fa-vk"></i><i class="fa fa-twitter"></i><i class="fa fa-google-plus"></i></p>
+        <p><input type="text" name="_username" placeholder="Логин" autofocus autocomplete="on" maxlength="20" required></p>
+        <p><input type="password" name="_password" placeholder="*******" autocomplete="on" maxlength="20" required></p>
+        <p><input type="submit" name="_submit" value="Войти"><span class="registration">Регистрация</span><p>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    </form>
+
+{% endblock fos_user_content %}
+
+
